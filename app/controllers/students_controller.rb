@@ -6,6 +6,18 @@ class StudentsController < ApplicationController
   end
 
   def show
+    if @student.active? 
+      @active = "active"
+    else
+      @active = "inactive"
+    end
+  end
+
+  def activate
+    set_student
+    @student.active = !@student.active
+    @student.save
+    redirect_to @student
   end
 
   private
